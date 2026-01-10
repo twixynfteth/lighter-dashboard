@@ -173,7 +173,7 @@
         
         .table-header {
             display: grid;
-            grid-template-columns: 80px 1fr 180px 100px;
+            grid-template-columns: 60px 1fr 150px 120px 80px;
             padding: 14px 20px;
             background: var(--bg-tertiary);
             border-bottom: 1px solid var(--border);
@@ -186,7 +186,7 @@
         
         .table-row {
             display: grid;
-            grid-template-columns: 80px 1fr 180px 100px;
+            grid-template-columns: 60px 1fr 150px 120px 80px;
             padding: 16px 20px;
             border-bottom: 1px solid var(--border);
             transition: background 0.15s;
@@ -232,6 +232,21 @@
             font-weight: 600;
             text-align: right;
             color: var(--accent);
+        }
+        
+        .change {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            text-align: right;
+            color: var(--text-muted);
+        }
+        
+        .change.positive {
+            color: #26a69a;
+        }
+        
+        .change.negative {
+            color: #ef5350;
         }
         
         .account-id {
@@ -376,7 +391,8 @@
                                         rank: index + 1,
                                         account_index: row.account_index || index,
                                         address: row.address,
-                                        balance: parseFloat(row.balance) || 0
+                                        balance: parseFloat(row.balance) || 0,
+                                        change_24h: parseFloat(row.change_24h) || 0
                                     }))
                                     .sort((a, b) => b.balance - a.balance);
                                 setData(parsed);
@@ -415,6 +431,18 @@
             
             const formatBalance = (bal) => {
                 return bal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' LIT';
+            };
+            
+            const formatChange = (change) => {
+                if (change === 0) return '-';
+                const prefix = change > 0 ? '+' : '';
+                return prefix + change.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            };
+            
+            const getChangeClass = (change) => {
+                if (change > 0) return 'change positive';
+                if (change < 0) return 'change negative';
+                return 'change';
             };
             
             const formatAddress = (addr) => {
@@ -528,6 +556,7 @@
                                 <div>Rank</div>
                                 <div>Address</div>
                                 <div style={{ textAlign: 'right' }}>Balance</div>
+                                <div style={{ textAlign: 'right' }}>24h Change</div>
                                 <div style={{ textAlign: 'right' }}>Account</div>
                             </div>
                             
@@ -538,6 +567,7 @@
                                         <div className={getRankClass(displayRank)}>{displayRank}</div>
                                         <div className="address" title="Click to copy" onClick={() => {navigator.clipboard.writeText(row.address); alert('Copied!');}}>{formatAddress(row.address)}</div>
                                         <div className="balance">{formatBalance(row.balance)}</div>
+                                        <div className={getChangeClass(row.change_24h)}>{formatChange(row.change_24h)}</div>
                                         <div className="account-id">#{row.account_index}</div>
                                     </div>
                                 );
