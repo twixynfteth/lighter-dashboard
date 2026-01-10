@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lighter Top Holders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-tertiary: #111111;
+            --accent: #26a69a;
+            --accent-light: #2ed1b8;
+            --green: #26a69a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255,255,255,0.7);
+            --text-muted: rgba(255,255,255,0.4);
+            --border: rgba(255,255,255,0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        header {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            background: var(--bg-primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background: var(--accent);
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 83, 80, 0.4); }
+            50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(239, 83, 80, 0); }
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+        
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 4px;
+        }
+        
+        .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .stat-value.red {
+            color: var(--accent);
+        }
+        
+        .search-container {
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            font-family: 'JetBrains Mono', monospace;
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+        
+        .table-container {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+        
+        .table-header {
+            display: grid;
+            grid-template-columns: 80px 1fr 180px 100px;
+            padding: 14px 20px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        
+        .table-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 180px 100px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.15s;
+            align-items: center;
+        }
+        
+        .table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .table-row:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .rank {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        
+        .rank.top1 { color: #ffd700; }
+        .rank.top2 { color: #c0c0c0; }
+        .rank.top3 { color: #cd7f32; }
+        
+        .address {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.15s;
+            word-break: break-all;
+            user-select: all;
+        }
+        
+        .address:hover {
+            color: var(--accent);
+        }
+        
+        .balance {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: right;
+            color: var(--accent);
+        }
+        
+        .account-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            text-align: right;
+            color: var(--text-muted);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background: var(--bg-tertiary);
+            border-top: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+        
+        .pagination-info {
+            color: var(--text-muted);
+        }
+        
+        .pagination-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .pagination-btn {
+            font-family: 'JetBrains Mono', monospace;
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .pagination-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .footer-text .status {
+            color: var(--accent);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 100px 20px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .error {
+            text-align: center;
+            padding: 100px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .table-header,
+            .table-row {
+                grid-template-columns: 60px 1fr 120px;
+            }
+            
+            .account-id {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+        
+        function App() {
+            const [data, setData] = useState([]);
+            const [search, setSearch] = useState('');
+            const [page, setPage] = useState(1);
+            const [loading, setLoading] = useState(true);
+            const [error, setError] = useState(null);
+            const perPage = 25;
+            
+            useEffect(() => {
+                // Auto-load CSV from same directory
+                fetch('top_holders.csv')
+                    .then(response => {
+                        if (!response.ok) throw new Error('CSV not found');
+                        return response.text();
+                    })
+                    .then(csvText => {
+                        Papa.parse(csvText, {
+                            header: true,
+                            complete: (results) => {
+                                const parsed = results.data
+                                    .filter(row => row.address && row.balance)
+                                    .map((row, index) => ({
+                                        rank: index + 1,
+                                        account_index: row.account_index || index,
+                                        address: row.address,
+                                        balance: parseFloat(row.balance) || 0
+                                    }))
+                                    .sort((a, b) => b.balance - a.balance);
+                                setData(parsed);
+                                setLoading(false);
+                            },
+                            error: (err) => {
+                                setError('Failed to parse CSV');
+                                setLoading(false);
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        setError('Could not load top_holders.csv');
+                        setLoading(false);
+                    });
+            }, []);
+            
+            const filteredData = useMemo(() => {
+                if (!search) return data;
+                const s = search.toLowerCase();
+                return data.filter(row => 
+                    row.address.toLowerCase().includes(s) ||
+                    row.account_index.toString().includes(s)
+                );
+            }, [data, search]);
+            
+            const totalPages = Math.ceil(filteredData.length / perPage);
+            const paginatedData = filteredData.slice((page - 1) * perPage, page * perPage);
+            
+            const stats = useMemo(() => {
+                const total = data.reduce((sum, row) => sum + row.balance, 0);
+                const whales = data.filter(row => row.balance >= 100000).length;
+                const top = data[0]?.balance || 0;
+                return { total, whales, top, count: data.length };
+            }, [data]);
+            
+            const formatBalance = (bal) => {
+                return bal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' LIT';
+            };
+            
+            const formatAddress = (addr) => {
+                if (!addr) return 'N/A';
+                return addr; // Show full address
+            };
+            
+            const copyAddress = (addr) => {
+                navigator.clipboard.writeText(addr);
+            };
+            
+            const getRankClass = (rank) => {
+                if (rank === 1) return 'rank top1';
+                if (rank === 2) return 'rank top2';
+                if (rank === 3) return 'rank top3';
+                return 'rank';
+            };
+            
+            if (loading) {
+                return (
+                    <>
+                        <header>
+                            <div className="container">
+                                <div className="header-content">
+                                    <div className="logo">Lighter Top Holders<span className="cursor"></span></div>
+                                    <div className="live-badge">
+                                        <div className="live-dot"></div>
+                                        <span>LIVE</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                        <main className="container">
+                            <div className="loading">
+                                <div className="loading-spinner"></div>
+                                <div>Loading 10,000 holders...</div>
+                            </div>
+                        </main>
+                    </>
+                );
+            }
+            
+            if (error) {
+                return (
+                    <>
+                        <header>
+                            <div className="container">
+                                <div className="header-content">
+                                    <div className="logo">Lighter Top Holders<span className="cursor"></span></div>
+                                </div>
+                            </div>
+                        </header>
+                        <main className="container">
+                            <div className="error">
+                                <div>{error}</div>
+                                <div style={{marginTop: '10px', fontSize: '12px', color: 'var(--text-muted)'}}>
+                                    Make sure top_holders.csv is in the same folder
+                                </div>
+                            </div>
+                        </main>
+                    </>
+                );
+            }
+            
+            return (
+                <>
+                    <header>
+                        <div className="container">
+                            <div className="header-content">
+                                <div className="logo">Lighter Top Holders<span className="cursor"></span></div>
+                                <div className="live-badge">
+                                    <div className="live-dot"></div>
+                                    <span>LIVE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    
+                    <main className="container">
+                        <div className="stats">
+                            <div className="stat-card">
+                                <div className="stat-label">Accounts</div>
+                                <div className="stat-value">{stats.count.toLocaleString()}</div>
+                            </div>
+                            <div className="stat-card">
+                                <div className="stat-label">Total LIT</div>
+                                <div className="stat-value red">{(stats.total / 1000000).toFixed(1)}M</div>
+                            </div>
+                            <div className="stat-card">
+                                <div className="stat-label">Top Balance</div>
+                                <div className="stat-value">{(stats.top / 1000).toFixed(0)}K LIT</div>
+                            </div>
+                            <div className="stat-card">
+                                <div className="stat-label">Whales (100K+ LIT)</div>
+                                <div className="stat-value red">{stats.whales.toLocaleString()}</div>
+                            </div>
+                        </div>
+                        
+                        <div className="search-container">
+                            <input 
+                                type="text" 
+                                className="search-input" 
+                                placeholder="Search address..."
+                                value={search}
+                                onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+                            />
+                        </div>
+                        
+                        <div className="table-container">
+                            <div className="table-header">
+                                <div>Rank</div>
+                                <div>Address</div>
+                                <div style={{ textAlign: 'right' }}>Balance</div>
+                                <div style={{ textAlign: 'right' }}>Account</div>
+                            </div>
+                            
+                            {paginatedData.map((row, i) => {
+                                const displayRank = (page - 1) * perPage + i + 1;
+                                return (
+                                    <div className="table-row" key={row.account_index}>
+                                        <div className={getRankClass(displayRank)}>{displayRank}</div>
+                                        <div className="address" title="Click to copy" onClick={() => {navigator.clipboard.writeText(row.address); alert('Copied!');}}>{formatAddress(row.address)}</div>
+                                        <div className="balance">{formatBalance(row.balance)}</div>
+                                        <div className="account-id">#{row.account_index}</div>
+                                    </div>
+                                );
+                            })}
+                            
+                            <div className="pagination">
+                                <div className="pagination-info">
+                                    {((page - 1) * perPage + 1).toLocaleString()}-{Math.min(page * perPage, filteredData.length).toLocaleString()} of {filteredData.length.toLocaleString()}
+                                </div>
+                                <div className="pagination-buttons">
+                                    <button 
+                                        className="pagination-btn" 
+                                        disabled={page === 1}
+                                        onClick={() => setPage(p => p - 1)}
+                                    >
+                                        Prev
+                                    </button>
+                                    <button 
+                                        className="pagination-btn" 
+                                        disabled={page >= totalPages}
+                                        onClick={() => setPage(p => p + 1)}
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <footer>
+                            <div className="footer-text">
+                                <span>Data loaded</span>
+                                <span>•</span>
+                                <span>Status: <span className="status">Online</span></span>
+                                <span>•</span>
+                                <span>{stats.count.toLocaleString()} accounts indexed</span>
+                            </div>
+                        </footer>
+                    </main>
+                </>
+            );
+        }
+        
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
