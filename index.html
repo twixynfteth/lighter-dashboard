@@ -173,7 +173,7 @@
         
         .table-header {
             display: grid;
-            grid-template-columns: 60px 1fr 150px 120px 120px 80px;
+            grid-template-columns: 60px 1fr 150px 120px 80px;
             padding: 14px 20px;
             background: var(--bg-tertiary);
             border-bottom: 1px solid var(--border);
@@ -186,7 +186,7 @@
         
         .table-row {
             display: grid;
-            grid-template-columns: 60px 1fr 150px 120px 120px 80px;
+            grid-template-columns: 60px 1fr 150px 120px 80px;
             padding: 16px 20px;
             border-bottom: 1px solid var(--border);
             transition: background 0.15s;
@@ -420,7 +420,31 @@
             const [search, setSearch] = useState('');
             const [page, setPage] = useState(1);
             const [expandedRows, setExpandedRows] = useState(new Set());
+            const [litPrice, setLitPrice] = useState(null);
             const perPage = 25;
+            
+            // Fetch LIT price from CoinGecko
+            useEffect(() => {
+                const fetchPrice = () => {
+                    // Using contract address for Lighter token on Ethereum
+                    fetch('https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2&vs_currencies=usd&include_24hr_change=true')
+                        .then(res => res.json())
+                        .then(data => {
+                            const tokenData = data['0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2'];
+                            if (tokenData) {
+                                setLitPrice({
+                                    price: tokenData.usd,
+                                    change24h: tokenData.usd_24h_change || 0
+                                });
+                            }
+                        })
+                        .catch(() => {});
+                };
+                
+                fetchPrice();
+                const interval = setInterval(fetchPrice, 60000); // Update every minute
+                return () => clearInterval(interval);
+            }, []);
             
             useEffect(() => {
                 fetch('top_holders.csv')
@@ -558,9 +582,24 @@
                                 <div className="logo">
                                     lighter_whales<span className="cursor"></span>
                                 </div>
-                                <div className="live-badge">
-                                    <span className="live-dot"></span>
-                                    <span>LIVE</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+                                    {litPrice && (
+                                        <div style={{ fontFamily: 'JetBrains Mono', fontSize: '14px' }}>
+                                            <span style={{ color: 'var(--text-muted)' }}>LIT </span>
+                                            <span style={{ color: 'var(--accent)', fontWeight: '600' }}>${litPrice.price.toFixed(4)}</span>
+                                            <span style={{ 
+                                                marginLeft: '8px',
+                                                color: litPrice.change24h >= 0 ? '#26a69a' : '#ef5350',
+                                                fontSize: '12px'
+                                            }}>
+                                                {litPrice.change24h >= 0 ? '+' : ''}{litPrice.change24h.toFixed(2)}%
+                                            </span>
+                                        </div>
+                                    )}
+                                    <div className="live-badge">
+                                        <span className="live-dot"></span>
+                                        <span>LIVE</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -575,10 +614,12 @@
                             <div className="stat-card">
                                 <div className="stat-label">Total LIT</div>
                                 <div className="stat-value green">{(stats.total / 1000000).toFixed(1)}M</div>
+                                {litPrice && <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>${(stats.total * litPrice.price / 1000000).toFixed(1)}M USD</div>}
                             </div>
                             <div className="stat-card">
                                 <div className="stat-label">Top Balance</div>
                                 <div className="stat-value">{(stats.top / 1000000).toFixed(2)}M LIT</div>
+                                {litPrice && <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>${(stats.top * litPrice.price / 1000000).toFixed(2)}M USD</div>}
                             </div>
                             <div className="stat-card">
                                 <div className="stat-label">Whales (100K+ LIT)</div>
@@ -600,7 +641,6 @@
                                 <div>Rank</div>
                                 <div>Address</div>
                                 <div style={{ textAlign: 'right' }}>LIT Balance</div>
-                                <div style={{ textAlign: 'right' }}>USD Value</div>
                                 <div style={{ textAlign: 'right' }}>24h Change</div>
                                 <div style={{ textAlign: 'right' }}>Account</div>
                             </div>
@@ -622,7 +662,6 @@
                                                 <span onClick={(e) => copyAddress(row.address, e)}>{formatAddress(row.address)}</span>
                                             </div>
                                             <div className="balance">{formatBalance(row.balance)}</div>
-                                            <div className="usd-value">{formatUSD(row.total_value_usd)}</div>
                                             <div className={getChangeClass(row.change_24h)}>{formatChange(row.change_24h)}</div>
                                             <div className="account-id">#{row.account_index}</div>
                                         </div>
