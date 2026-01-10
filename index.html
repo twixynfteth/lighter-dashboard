@@ -26,11 +26,7 @@
             --border: rgba(255,255,255,0.08);
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Space Grotesk', sans-serif;
@@ -39,11 +35,7 @@
             min-height: 100vh;
         }
         
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
         
         header {
             border-bottom: 1px solid var(--border);
@@ -106,6 +98,43 @@
             50% { opacity: 0.5; transform: scale(1.2); }
         }
         
+        .tabs {
+            display: flex;
+            gap: 8px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .tab:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+        
+        .tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .tab.buyers { }
+        .tab.buyers.active { background: var(--green); border-color: var(--green); }
+        .tab.sellers { }
+        .tab.sellers.active { background: var(--red); border-color: var(--red); color: #fff; }
+        
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -134,13 +163,9 @@
             font-weight: 600;
         }
         
-        .stat-value.green {
-            color: var(--accent);
-        }
+        .stat-value.green { color: var(--accent); }
         
-        .search-bar {
-            padding: 16px 0;
-        }
+        .search-bar { padding: 16px 0; }
         
         .search-bar input {
             width: 100%;
@@ -155,13 +180,8 @@
             transition: border-color 0.15s;
         }
         
-        .search-bar input:focus {
-            border-color: var(--accent);
-        }
-        
-        .search-bar input::placeholder {
-            color: var(--text-muted);
-        }
+        .search-bar input:focus { border-color: var(--accent); }
+        .search-bar input::placeholder { color: var(--text-muted); }
         
         .table-container {
             background: var(--bg-secondary);
@@ -194,14 +214,8 @@
             cursor: pointer;
         }
         
-        .table-row:hover {
-            background: var(--bg-tertiary);
-        }
-        
-        .table-row.expanded {
-            background: var(--bg-tertiary);
-            border-bottom: none;
-        }
+        .table-row:hover { background: var(--bg-tertiary); }
+        .table-row.expanded { background: var(--bg-tertiary); border-bottom: none; }
         
         .expanded-content {
             background: var(--bg-tertiary);
@@ -242,20 +256,9 @@
             color: var(--text-secondary);
         }
         
-        .rank.gold {
-            color: #FFD700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
-        
-        .rank.silver {
-            color: #C0C0C0;
-            text-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
-        }
-        
-        .rank.bronze {
-            color: #CD7F32;
-            text-shadow: 0 0 10px rgba(205, 127, 50, 0.3);
-        }
+        .rank.gold { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+        .rank.silver { color: #C0C0C0; text-shadow: 0 0 10px rgba(192, 192, 192, 0.3); }
+        .rank.bronze { color: #CD7F32; text-shadow: 0 0 10px rgba(205, 127, 50, 0.3); }
         
         .address {
             font-family: 'JetBrains Mono', monospace;
@@ -268,9 +271,7 @@
             gap: 8px;
         }
         
-        .address:hover {
-            color: var(--accent);
-        }
+        .address:hover { color: var(--accent); }
         
         .expand-icon {
             font-size: 10px;
@@ -278,9 +279,7 @@
             transition: transform 0.2s;
         }
         
-        .expand-icon.open {
-            transform: rotate(90deg);
-        }
+        .expand-icon.open { transform: rotate(90deg); }
         
         .balance {
             font-family: 'JetBrains Mono', monospace;
@@ -290,13 +289,6 @@
             color: var(--accent);
         }
         
-        .usd-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            text-align: right;
-            color: var(--text-secondary);
-        }
-        
         .change {
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
@@ -304,13 +296,8 @@
             color: var(--text-muted);
         }
         
-        .change.positive {
-            color: #26a69a;
-        }
-        
-        .change.negative {
-            color: #ef5350;
-        }
+        .change.positive { color: #26a69a; }
+        .change.negative { color: #ef5350; }
         
         .account-id {
             font-family: 'JetBrains Mono', monospace;
@@ -344,10 +331,7 @@
             color: var(--accent);
         }
         
-        .pagination button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
+        .pagination button:disabled { opacity: 0.3; cursor: not-allowed; }
         
         .page-info {
             font-family: 'JetBrains Mono', monospace;
@@ -375,34 +359,16 @@
             margin-bottom: 16px;
         }
         
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .copy-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 4px;
-            font-size: 12px;
-        }
-        
-        .copy-btn:hover {
-            color: var(--accent);
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
         
         @media (max-width: 768px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .tabs { flex-wrap: wrap; }
             .table-header, .table-row {
                 grid-template-columns: 40px 1fr 100px 80px;
             }
             .table-header > div:nth-child(4),
-            .table-header > div:nth-child(5),
-            .table-row > div:nth-child(4),
-            .table-row > div:nth-child(5) {
+            .table-row > div:nth-child(4) {
                 display: none;
             }
         }
@@ -421,12 +387,12 @@
             const [page, setPage] = useState(1);
             const [expandedRows, setExpandedRows] = useState(new Set());
             const [litPrice, setLitPrice] = useState(null);
+            const [activeTab, setActiveTab] = useState('holders'); // holders, buyers, sellers
             const perPage = 25;
             
             // Fetch LIT price from CoinGecko
             useEffect(() => {
                 const fetchPrice = () => {
-                    // Using contract address for Lighter token on Ethereum
                     fetch('https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2&vs_currencies=usd&include_24hr_change=true')
                         .then(res => res.json())
                         .then(data => {
@@ -440,9 +406,8 @@
                         })
                         .catch(() => {});
                 };
-                
                 fetchPrice();
-                const interval = setInterval(fetchPrice, 60000); // Update every minute
+                const interval = setInterval(fetchPrice, 60000);
                 return () => clearInterval(interval);
             }, []);
             
@@ -456,14 +421,11 @@
                                 const parsed = results.data
                                     .filter(row => row.address && row.balance)
                                     .map((row, index) => {
-                                        // Parse all token columns
                                         const tokens = {};
                                         Object.keys(row).forEach(key => {
                                             if (!['account_index', 'address', 'balance', 'yesterday_balance', 'change_24h', 'total_value_usd'].includes(key)) {
                                                 const val = parseFloat(row[key]);
-                                                if (val > 0) {
-                                                    tokens[key] = val;
-                                                }
+                                                if (val > 0) tokens[key] = val;
                                             }
                                         });
                                         
@@ -472,7 +434,6 @@
                                             account_index: row.account_index || index,
                                             address: row.address,
                                             balance: parseFloat(row.balance) || 0,
-                                            total_value_usd: parseFloat(row.total_value_usd) || 0,
                                             change_24h: parseFloat(row.change_24h) || 0,
                                             tokens: tokens
                                         };
@@ -491,38 +452,23 @@
                 return bal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' LIT';
             };
             
-            const formatUSD = (val) => {
-                if (!val) return '-';
-                return '$' + val.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-            };
-            
             const formatChange = (change) => {
                 if (change === 0) return '-';
                 const prefix = change > 0 ? '+' : '';
                 return prefix + change.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             };
             
-            const formatToken = (val, symbol) => {
-                if (val >= 1000000) {
-                    return (val / 1000000).toFixed(2) + 'M';
-                } else if (val >= 1000) {
-                    return (val / 1000).toFixed(2) + 'K';
-                } else if (val >= 1) {
-                    return val.toFixed(2);
-                } else {
-                    return val.toFixed(6);
-                }
+            const formatToken = (val) => {
+                if (val >= 1000000) return (val / 1000000).toFixed(2) + 'M';
+                if (val >= 1000) return (val / 1000).toFixed(2) + 'K';
+                if (val >= 1) return val.toFixed(2);
+                return val.toFixed(6);
             };
             
             const getChangeClass = (change) => {
                 if (change > 0) return 'change positive';
                 if (change < 0) return 'change negative';
                 return 'change';
-            };
-            
-            const formatAddress = (addr) => {
-                if (!addr) return 'N/A';
-                return addr;
             };
             
             const copyAddress = (addr, e) => {
@@ -533,11 +479,8 @@
             
             const toggleExpand = (index) => {
                 const newExpanded = new Set(expandedRows);
-                if (newExpanded.has(index)) {
-                    newExpanded.delete(index);
-                } else {
-                    newExpanded.add(index);
-                }
+                if (newExpanded.has(index)) newExpanded.delete(index);
+                else newExpanded.add(index);
                 setExpandedRows(newExpanded);
             };
             
@@ -548,21 +491,53 @@
                 return 'rank';
             };
             
-            const filteredData = data.filter(row => {
-                if (!search) return true;
-                const s = search.toLowerCase();
-                return row.address.toLowerCase().includes(s) ||
-                       row.account_index.toString().includes(s);
-            });
+            // Get data based on active tab
+            const getDisplayData = () => {
+                let filtered = [...data];
+                
+                if (activeTab === 'buyers') {
+                    // Top 100 biggest buyers (positive change)
+                    filtered = data.filter(r => r.change_24h > 0)
+                        .sort((a, b) => b.change_24h - a.change_24h)
+                        .slice(0, 100);
+                } else if (activeTab === 'sellers') {
+                    // Top 100 biggest sellers (negative change)
+                    filtered = data.filter(r => r.change_24h < 0)
+                        .sort((a, b) => a.change_24h - b.change_24h)
+                        .slice(0, 100);
+                }
+                
+                // Apply search
+                if (search) {
+                    const s = search.toLowerCase();
+                    filtered = filtered.filter(row => 
+                        row.address.toLowerCase().includes(s) ||
+                        row.account_index.toString().includes(s)
+                    );
+                }
+                
+                return filtered;
+            };
             
-            const totalPages = Math.ceil(filteredData.length / perPage);
-            const paginatedData = filteredData.slice((page - 1) * perPage, page * perPage);
+            const displayData = getDisplayData();
+            const totalPages = Math.ceil(displayData.length / perPage);
+            const paginatedData = displayData.slice((page - 1) * perPage, page * perPage);
             
             const stats = {
                 count: data.length,
                 total: data.reduce((sum, row) => sum + row.balance, 0),
                 top: data[0]?.balance || 0,
-                whales: data.filter(row => row.balance >= 100000).length
+                whales: data.filter(row => row.balance >= 100000).length,
+                totalBuyers: data.filter(r => r.change_24h > 0).length,
+                totalSellers: data.filter(r => r.change_24h < 0).length,
+                totalBought: data.filter(r => r.change_24h > 0).reduce((sum, r) => sum + r.change_24h, 0),
+                totalSold: Math.abs(data.filter(r => r.change_24h < 0).reduce((sum, r) => sum + r.change_24h, 0))
+            };
+            
+            const handleTabChange = (tab) => {
+                setActiveTab(tab);
+                setPage(1);
+                setExpandedRows(new Set());
             };
             
             if (loading) {
@@ -606,26 +581,91 @@
                     </header>
                     
                     <main className="container">
-                        <div className="stats">
-                            <div className="stat-card">
-                                <div className="stat-label">Accounts</div>
-                                <div className="stat-value">{stats.count.toLocaleString()}</div>
-                            </div>
-                            <div className="stat-card">
-                                <div className="stat-label">Total LIT</div>
-                                <div className="stat-value green">{(stats.total / 1000000).toFixed(1)}M</div>
-                                {litPrice && <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>${(stats.total * litPrice.price / 1000000).toFixed(1)}M USD</div>}
-                            </div>
-                            <div className="stat-card">
-                                <div className="stat-label">Top Balance</div>
-                                <div className="stat-value">{(stats.top / 1000000).toFixed(2)}M LIT</div>
-                                {litPrice && <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>${(stats.top * litPrice.price / 1000000).toFixed(2)}M USD</div>}
-                            </div>
-                            <div className="stat-card">
-                                <div className="stat-label">Whales (100K+ LIT)</div>
-                                <div className="stat-value green">{stats.whales.toLocaleString()}</div>
-                            </div>
+                        <div className="tabs">
+                            <button 
+                                className={`tab ${activeTab === 'holders' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('holders')}
+                            >
+                                🏆 Top Holders
+                            </button>
+                            <button 
+                                className={`tab buyers ${activeTab === 'buyers' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('buyers')}
+                            >
+                                📈 Biggest Buyers
+                            </button>
+                            <button 
+                                className={`tab sellers ${activeTab === 'sellers' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('sellers')}
+                            >
+                                📉 Biggest Sellers
+                            </button>
                         </div>
+                        
+                        {activeTab === 'holders' && (
+                            <div className="stats">
+                                <div className="stat-card">
+                                    <div className="stat-label">Accounts</div>
+                                    <div className="stat-value">{stats.count.toLocaleString()}</div>
+                                </div>
+                                <div className="stat-card">
+                                    <div className="stat-label">Total LIT</div>
+                                    <div className="stat-value green">{(stats.total / 1000000).toFixed(1)}M</div>
+                                    {litPrice && <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>${(stats.total * litPrice.price / 1000000).toFixed(1)}M USD</div>}
+                                </div>
+                                <div className="stat-card">
+                                    <div className="stat-label">Top Balance</div>
+                                    <div className="stat-value">{(stats.top / 1000000).toFixed(2)}M LIT</div>
+                                    {litPrice && <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>${(stats.top * litPrice.price / 1000000).toFixed(2)}M USD</div>}
+                                </div>
+                                <div className="stat-card">
+                                    <div className="stat-label">Whales (100K+ LIT)</div>
+                                    <div className="stat-value green">{stats.whales.toLocaleString()}</div>
+                                </div>
+                            </div>
+                        )}
+                        
+                        {activeTab === 'buyers' && (
+                            <div className="stats">
+                                <div className="stat-card">
+                                    <div className="stat-label">Total Buyers (24h)</div>
+                                    <div className="stat-value green">{stats.totalBuyers.toLocaleString()}</div>
+                                </div>
+                                <div className="stat-card">
+                                    <div className="stat-label">Total Bought (24h)</div>
+                                    <div className="stat-value green">+{(stats.totalBought / 1000000).toFixed(2)}M LIT</div>
+                                </div>
+                                <div className="stat-card">
+                                    <div className="stat-label">Showing</div>
+                                    <div className="stat-value">Top 100</div>
+                                </div>
+                                <div className="stat-card">
+                                    <div className="stat-label">Top Buy</div>
+                                    <div className="stat-value green">+{displayData[0] ? formatToken(displayData[0].change_24h) : '0'}</div>
+                                </div>
+                            </div>
+                        )}
+                        
+                        {activeTab === 'sellers' && (
+                            <div className="stats">
+                                <div className="stat-card">
+                                    <div className="stat-label">Total Sellers (24h)</div>
+                                    <div className="stat-value" style={{ color: 'var(--red)' }}>{stats.totalSellers.toLocaleString()}</div>
+                                </div>
+                                <div className="stat-card">
+                                    <div className="stat-label">Total Sold (24h)</div>
+                                    <div className="stat-value" style={{ color: 'var(--red)' }}>-{(stats.totalSold / 1000000).toFixed(2)}M LIT</div>
+                                </div>
+                                <div className="stat-card">
+                                    <div className="stat-label">Showing</div>
+                                    <div className="stat-value">Top 100</div>
+                                </div>
+                                <div className="stat-card">
+                                    <div className="stat-label">Top Sell</div>
+                                    <div className="stat-value" style={{ color: 'var(--red)' }}>{displayData[0] ? formatToken(displayData[0].change_24h) : '0'}</div>
+                                </div>
+                            </div>
+                        )}
                         
                         <div className="search-bar">
                             <input 
@@ -659,7 +699,7 @@
                                             <div className={getRankClass(displayRank)}>{displayRank}</div>
                                             <div className="address">
                                                 {hasTokens && <span className={`expand-icon ${isExpanded ? 'open' : ''}`}>▶</span>}
-                                                <span onClick={(e) => copyAddress(row.address, e)}>{formatAddress(row.address)}</span>
+                                                <span onClick={(e) => copyAddress(row.address, e)}>{row.address}</span>
                                             </div>
                                             <div className="balance">{formatBalance(row.balance)}</div>
                                             <div className={getChangeClass(row.change_24h)}>{formatChange(row.change_24h)}</div>
@@ -674,7 +714,7 @@
                                                         .map(([symbol, balance]) => (
                                                             <div className="token-item" key={symbol}>
                                                                 <div className="token-symbol">{symbol}</div>
-                                                                <div className="token-balance">{formatToken(balance, symbol)}</div>
+                                                                <div className="token-balance">{formatToken(balance)}</div>
                                                             </div>
                                                         ))
                                                     }
@@ -684,15 +724,14 @@
                                     </React.Fragment>
                                 );
                             })}
-                            
                         </div>
                         
                         <div className="pagination">
                             <button onClick={() => setPage(1)} disabled={page === 1}>First</button>
                             <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>Prev</button>
-                            <span className="page-info">Page {page} of {totalPages}</span>
-                            <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Next</button>
-                            <button onClick={() => setPage(totalPages)} disabled={page === totalPages}>Last</button>
+                            <span className="page-info">Page {page} of {totalPages || 1}</span>
+                            <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages || totalPages === 0}>Next</button>
+                            <button onClick={() => setPage(totalPages)} disabled={page === totalPages || totalPages === 0}>Last</button>
                         </div>
                     </main>
                 </div>
