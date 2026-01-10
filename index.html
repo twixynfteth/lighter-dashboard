@@ -19,6 +19,7 @@
             --accent: #26a69a;
             --accent-light: #2ed1b8;
             --green: #26a69a;
+            --red: #ef5350;
             --text-primary: #ffffff;
             --text-secondary: rgba(255,255,255,0.7);
             --text-muted: rgba(255,255,255,0.4);
@@ -39,7 +40,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -101,27 +102,26 @@
         }
         
         @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 83, 80, 0.4); }
-            50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(239, 83, 80, 0); }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
         }
         
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
-            margin: 32px 0;
+            padding: 24px 0;
         }
         
         .stat-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
+            border-radius: 8px;
             padding: 20px;
-            border-radius: 4px;
         }
         
         .stat-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-muted);
@@ -130,50 +130,50 @@
         
         .stat-value {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 600;
         }
         
-        .stat-value.red {
+        .stat-value.green {
             color: var(--accent);
         }
         
-        .search-container {
-            margin-bottom: 20px;
+        .search-bar {
+            padding: 16px 0;
         }
         
-        .search-input {
-            font-family: 'JetBrains Mono', monospace;
+        .search-bar input {
             width: 100%;
-            max-width: 400px;
-            padding: 12px 16px;
+            padding: 14px 20px;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 8px;
             color: var(--text-primary);
-            font-size: 13px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
             outline: none;
-            transition: border-color 0.2s;
+            transition: border-color 0.15s;
         }
         
-        .search-input::placeholder {
-            color: var(--text-muted);
-        }
-        
-        .search-input:focus {
+        .search-bar input:focus {
             border-color: var(--accent);
         }
         
+        .search-bar input::placeholder {
+            color: var(--text-muted);
+        }
+        
         .table-container {
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            overflow: hidden;
             background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 24px;
         }
         
         .table-header {
             display: grid;
-            grid-template-columns: 60px 1fr 150px 120px 80px;
+            grid-template-columns: 60px 1fr 150px 120px 120px 80px;
             padding: 14px 20px;
             background: var(--bg-tertiary);
             border-bottom: 1px solid var(--border);
@@ -186,44 +186,100 @@
         
         .table-row {
             display: grid;
-            grid-template-columns: 60px 1fr 150px 120px 80px;
+            grid-template-columns: 60px 1fr 150px 120px 120px 80px;
             padding: 16px 20px;
             border-bottom: 1px solid var(--border);
             transition: background 0.15s;
             align-items: center;
-        }
-        
-        .table-row:last-child {
-            border-bottom: none;
+            cursor: pointer;
         }
         
         .table-row:hover {
             background: var(--bg-tertiary);
         }
         
-        .rank {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
+        .table-row.expanded {
+            background: var(--bg-tertiary);
+            border-bottom: none;
         }
         
-        .rank.top1 { color: #ffd700; }
-        .rank.top2 { color: #c0c0c0; }
-        .rank.top3 { color: #cd7f32; }
+        .expanded-content {
+            background: var(--bg-tertiary);
+            padding: 0 20px 20px 80px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .token-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }
+        
+        .token-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px;
+        }
+        
+        .token-symbol {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .token-balance {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .rank {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .rank.gold {
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .rank.silver {
+            color: #C0C0C0;
+            text-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+        }
+        
+        .rank.bronze {
+            color: #CD7F32;
+            text-shadow: 0 0 10px rgba(205, 127, 50, 0.3);
+        }
         
         .address {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-secondary);
-            cursor: pointer;
             transition: color 0.15s;
             word-break: break-all;
-            user-select: all;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .address:hover {
             color: var(--accent);
+        }
+        
+        .expand-icon {
+            font-size: 10px;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+        
+        .expand-icon.open {
+            transform: rotate(90deg);
         }
         
         .balance {
@@ -232,6 +288,13 @@
             font-weight: 600;
             text-align: right;
             color: var(--accent);
+        }
+        
+        .usd-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            text-align: right;
+            color: var(--text-secondary);
         }
         
         .change {
@@ -252,75 +315,54 @@
         .account-id {
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
-            text-align: right;
             color: var(--text-muted);
+            text-align: right;
         }
         
         .pagination {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 14px 20px;
-            background: var(--bg-tertiary);
-            border-top: 1px solid var(--border);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-        }
-        
-        .pagination-info {
-            color: var(--text-muted);
-        }
-        
-        .pagination-buttons {
-            display: flex;
             gap: 8px;
+            padding: 24px 0;
         }
         
-        .pagination-btn {
-            font-family: 'JetBrains Mono', monospace;
-            padding: 8px 16px;
+        .pagination button {
+            padding: 10px 16px;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 4px;
-            color: var(--text-secondary);
-            font-size: 12px;
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.15s;
         }
         
-        .pagination-btn:hover:not(:disabled) {
+        .pagination button:hover:not(:disabled) {
             border-color: var(--accent);
             color: var(--accent);
         }
         
-        .pagination-btn:disabled {
+        .pagination button:disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
         
-        footer {
-            margin-top: 40px;
-            padding: 20px 0;
-            border-top: 1px solid var(--border);
-        }
-        
-        .footer-text {
+        .page-info {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
+            font-size: 13px;
             color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        
-        .footer-text .status {
-            color: var(--accent);
+            padding: 0 16px;
         }
         
         .loading {
-            text-align: center;
-            padding: 100px 20px;
-            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            color: var(--text-muted);
         }
         
         .loading-spinner {
@@ -330,17 +372,23 @@
             border-top-color: var(--accent);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin-bottom: 16px;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
         
-        .error {
-            text-align: center;
-            padding: 100px 20px;
-            font-family: 'JetBrains Mono', monospace;
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+            font-size: 12px;
+        }
+        
+        .copy-btn:hover {
             color: var(--accent);
         }
         
@@ -348,13 +396,13 @@
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .table-header,
-            .table-row {
-                grid-template-columns: 60px 1fr 120px;
+            .table-header, .table-row {
+                grid-template-columns: 40px 1fr 100px 80px;
             }
-            
-            .account-id {
+            .table-header > div:nth-child(4),
+            .table-header > div:nth-child(5),
+            .table-row > div:nth-child(4),
+            .table-row > div:nth-child(5) {
                 display: none;
             }
         }
@@ -364,79 +412,82 @@
     <div id="root"></div>
     
     <script type="text/babel">
-        const { useState, useEffect, useMemo } = React;
+        const { useState, useEffect } = React;
         
         function App() {
             const [data, setData] = useState([]);
+            const [loading, setLoading] = useState(true);
             const [search, setSearch] = useState('');
             const [page, setPage] = useState(1);
-            const [loading, setLoading] = useState(true);
-            const [error, setError] = useState(null);
+            const [expandedRows, setExpandedRows] = useState(new Set());
             const perPage = 25;
             
             useEffect(() => {
-                // Auto-load CSV from same directory
                 fetch('top_holders.csv')
-                    .then(response => {
-                        if (!response.ok) throw new Error('CSV not found');
-                        return response.text();
-                    })
+                    .then(res => res.text())
                     .then(csvText => {
                         Papa.parse(csvText, {
                             header: true,
                             complete: (results) => {
                                 const parsed = results.data
                                     .filter(row => row.address && row.balance)
-                                    .map((row, index) => ({
-                                        rank: index + 1,
-                                        account_index: row.account_index || index,
-                                        address: row.address,
-                                        balance: parseFloat(row.balance) || 0,
-                                        change_24h: parseFloat(row.change_24h) || 0
-                                    }))
+                                    .map((row, index) => {
+                                        // Parse all token columns
+                                        const tokens = {};
+                                        Object.keys(row).forEach(key => {
+                                            if (!['account_index', 'address', 'balance', 'yesterday_balance', 'change_24h', 'total_value_usd'].includes(key)) {
+                                                const val = parseFloat(row[key]);
+                                                if (val > 0) {
+                                                    tokens[key] = val;
+                                                }
+                                            }
+                                        });
+                                        
+                                        return {
+                                            rank: index + 1,
+                                            account_index: row.account_index || index,
+                                            address: row.address,
+                                            balance: parseFloat(row.balance) || 0,
+                                            total_value_usd: parseFloat(row.total_value_usd) || 0,
+                                            change_24h: parseFloat(row.change_24h) || 0,
+                                            tokens: tokens
+                                        };
+                                    })
                                     .sort((a, b) => b.balance - a.balance);
                                 setData(parsed);
                                 setLoading(false);
                             },
-                            error: (err) => {
-                                setError('Failed to parse CSV');
-                                setLoading(false);
-                            }
+                            error: () => setLoading(false)
                         });
                     })
-                    .catch(err => {
-                        setError('Could not load top_holders.csv');
-                        setLoading(false);
-                    });
+                    .catch(() => setLoading(false));
             }, []);
-            
-            const filteredData = useMemo(() => {
-                if (!search) return data;
-                const s = search.toLowerCase();
-                return data.filter(row => 
-                    row.address.toLowerCase().includes(s) ||
-                    row.account_index.toString().includes(s)
-                );
-            }, [data, search]);
-            
-            const totalPages = Math.ceil(filteredData.length / perPage);
-            const paginatedData = filteredData.slice((page - 1) * perPage, page * perPage);
-            
-            const stats = useMemo(() => {
-                const total = data.reduce((sum, row) => sum + row.balance, 0);
-                const whales = data.filter(row => row.balance >= 100000).length;
-                const top = data[0]?.balance || 0;
-                return { total, whales, top, count: data.length };
-            }, [data]);
             
             const formatBalance = (bal) => {
                 return bal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' LIT';
+            };
+            
+            const formatUSD = (val) => {
+                if (!val) return '-';
+                return '$' + val.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
             };
             
             const formatChange = (change) => {
                 if (change === 0) return '-';
                 const prefix = change > 0 ? '+' : '';
                 return prefix + change.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            };
+            
+            const formatToken = (val, symbol) => {
+                if (val >= 1000000) {
+                    return (val / 1000000).toFixed(2) + 'M';
+                } else if (val >= 1000) {
+                    return (val / 1000).toFixed(2) + 'K';
+                } else if (val >= 1) {
+                    return val.toFixed(2);
+                } else {
+                    return val.toFixed(6);
+                }
             };
             
             const getChangeClass = (change) => {
@@ -447,74 +498,68 @@
             
             const formatAddress = (addr) => {
                 if (!addr) return 'N/A';
-                return addr; // Show full address
+                return addr;
             };
             
-            const copyAddress = (addr) => {
+            const copyAddress = (addr, e) => {
+                e.stopPropagation();
                 navigator.clipboard.writeText(addr);
+                alert('Copied!');
+            };
+            
+            const toggleExpand = (index) => {
+                const newExpanded = new Set(expandedRows);
+                if (newExpanded.has(index)) {
+                    newExpanded.delete(index);
+                } else {
+                    newExpanded.add(index);
+                }
+                setExpandedRows(newExpanded);
             };
             
             const getRankClass = (rank) => {
-                if (rank === 1) return 'rank top1';
-                if (rank === 2) return 'rank top2';
-                if (rank === 3) return 'rank top3';
+                if (rank === 1) return 'rank gold';
+                if (rank === 2) return 'rank silver';
+                if (rank === 3) return 'rank bronze';
                 return 'rank';
+            };
+            
+            const filteredData = data.filter(row => {
+                if (!search) return true;
+                const s = search.toLowerCase();
+                return row.address.toLowerCase().includes(s) ||
+                       row.account_index.toString().includes(s);
+            });
+            
+            const totalPages = Math.ceil(filteredData.length / perPage);
+            const paginatedData = filteredData.slice((page - 1) * perPage, page * perPage);
+            
+            const stats = {
+                count: data.length,
+                total: data.reduce((sum, row) => sum + row.balance, 0),
+                top: data[0]?.balance || 0,
+                whales: data.filter(row => row.balance >= 100000).length
             };
             
             if (loading) {
                 return (
-                    <>
-                        <header>
-                            <div className="container">
-                                <div className="header-content">
-                                    <div className="logo">Lighter Top Holders<span className="cursor"></span></div>
-                                    <div className="live-badge">
-                                        <div className="live-dot"></div>
-                                        <span>LIVE</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </header>
-                        <main className="container">
-                            <div className="loading">
-                                <div className="loading-spinner"></div>
-                                <div>Loading 10,000 holders...</div>
-                            </div>
-                        </main>
-                    </>
-                );
-            }
-            
-            if (error) {
-                return (
-                    <>
-                        <header>
-                            <div className="container">
-                                <div className="header-content">
-                                    <div className="logo">Lighter Top Holders<span className="cursor"></span></div>
-                                </div>
-                            </div>
-                        </header>
-                        <main className="container">
-                            <div className="error">
-                                <div>{error}</div>
-                                <div style={{marginTop: '10px', fontSize: '12px', color: 'var(--text-muted)'}}>
-                                    Make sure top_holders.csv is in the same folder
-                                </div>
-                            </div>
-                        </main>
-                    </>
+                    <div className="loading">
+                        <div className="loading-spinner"></div>
+                        <div>Loading data...</div>
+                    </div>
                 );
             }
             
             return (
-                <>
+                <div>
                     <header>
                         <div className="container">
                             <div className="header-content">
-                                <div className="logo">Lighter Top Holders<span className="cursor"></span></div>
+                                <div className="logo">
+                                    lighter_whales<span className="cursor"></span>
+                                </div>
                                 <div className="live-badge">
-                                    <div className="live-dot"></div>
+                                    <span className="live-dot"></span>
                                     <span>LIVE</span>
                                 </div>
                             </div>
@@ -529,7 +574,7 @@
                             </div>
                             <div className="stat-card">
                                 <div className="stat-label">Total LIT</div>
-                                <div className="stat-value red">{(stats.total / 1000000).toFixed(1)}M</div>
+                                <div className="stat-value green">{(stats.total / 1000000).toFixed(1)}M</div>
                             </div>
                             <div className="stat-card">
                                 <div className="stat-label">Top Balance</div>
@@ -537,14 +582,13 @@
                             </div>
                             <div className="stat-card">
                                 <div className="stat-label">Whales (100K+ LIT)</div>
-                                <div className="stat-value red">{stats.whales.toLocaleString()}</div>
+                                <div className="stat-value green">{stats.whales.toLocaleString()}</div>
                             </div>
                         </div>
                         
-                        <div className="search-container">
+                        <div className="search-bar">
                             <input 
-                                type="text" 
-                                className="search-input" 
+                                type="text"
                                 placeholder="Search address..."
                                 value={search}
                                 onChange={(e) => { setSearch(e.target.value); setPage(1); }}
@@ -555,58 +599,64 @@
                             <div className="table-header">
                                 <div>Rank</div>
                                 <div>Address</div>
-                                <div style={{ textAlign: 'right' }}>Balance</div>
+                                <div style={{ textAlign: 'right' }}>LIT Balance</div>
+                                <div style={{ textAlign: 'right' }}>USD Value</div>
                                 <div style={{ textAlign: 'right' }}>24h Change</div>
                                 <div style={{ textAlign: 'right' }}>Account</div>
                             </div>
                             
                             {paginatedData.map((row, i) => {
                                 const displayRank = (page - 1) * perPage + i + 1;
+                                const isExpanded = expandedRows.has(row.account_index);
+                                const hasTokens = Object.keys(row.tokens).length > 0;
+                                
                                 return (
-                                    <div className="table-row" key={row.account_index}>
-                                        <div className={getRankClass(displayRank)}>{displayRank}</div>
-                                        <div className="address" title="Click to copy" onClick={() => {navigator.clipboard.writeText(row.address); alert('Copied!');}}>{formatAddress(row.address)}</div>
-                                        <div className="balance">{formatBalance(row.balance)}</div>
-                                        <div className={getChangeClass(row.change_24h)}>{formatChange(row.change_24h)}</div>
-                                        <div className="account-id">#{row.account_index}</div>
-                                    </div>
+                                    <React.Fragment key={row.account_index}>
+                                        <div 
+                                            className={`table-row ${isExpanded ? 'expanded' : ''}`}
+                                            onClick={() => hasTokens && toggleExpand(row.account_index)}
+                                        >
+                                            <div className={getRankClass(displayRank)}>{displayRank}</div>
+                                            <div className="address">
+                                                {hasTokens && <span className={`expand-icon ${isExpanded ? 'open' : ''}`}>▶</span>}
+                                                <span onClick={(e) => copyAddress(row.address, e)}>{formatAddress(row.address)}</span>
+                                            </div>
+                                            <div className="balance">{formatBalance(row.balance)}</div>
+                                            <div className="usd-value">{formatUSD(row.total_value_usd)}</div>
+                                            <div className={getChangeClass(row.change_24h)}>{formatChange(row.change_24h)}</div>
+                                            <div className="account-id">#{row.account_index}</div>
+                                        </div>
+                                        
+                                        {isExpanded && (
+                                            <div className="expanded-content">
+                                                <div className="token-grid">
+                                                    {Object.entries(row.tokens)
+                                                        .sort((a, b) => b[1] - a[1])
+                                                        .map(([symbol, balance]) => (
+                                                            <div className="token-item" key={symbol}>
+                                                                <div className="token-symbol">{symbol}</div>
+                                                                <div className="token-balance">{formatToken(balance, symbol)}</div>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </div>
+                                        )}
+                                    </React.Fragment>
                                 );
                             })}
                             
-                            <div className="pagination">
-                                <div className="pagination-info">
-                                    {((page - 1) * perPage + 1).toLocaleString()}-{Math.min(page * perPage, filteredData.length).toLocaleString()} of {filteredData.length.toLocaleString()}
-                                </div>
-                                <div className="pagination-buttons">
-                                    <button 
-                                        className="pagination-btn" 
-                                        disabled={page === 1}
-                                        onClick={() => setPage(p => p - 1)}
-                                    >
-                                        Prev
-                                    </button>
-                                    <button 
-                                        className="pagination-btn" 
-                                        disabled={page >= totalPages}
-                                        onClick={() => setPage(p => p + 1)}
-                                    >
-                                        Next
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                         
-                        <footer>
-                            <div className="footer-text">
-                                <span>Data loaded</span>
-                                <span>•</span>
-                                <span>Status: <span className="status">Online</span></span>
-                                <span>•</span>
-                                <span>{stats.count.toLocaleString()} accounts indexed</span>
-                            </div>
-                        </footer>
+                        <div className="pagination">
+                            <button onClick={() => setPage(1)} disabled={page === 1}>First</button>
+                            <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>Prev</button>
+                            <span className="page-info">Page {page} of {totalPages}</span>
+                            <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Next</button>
+                            <button onClick={() => setPage(totalPages)} disabled={page === totalPages}>Last</button>
+                        </div>
                     </main>
-                </>
+                </div>
             );
         }
         
