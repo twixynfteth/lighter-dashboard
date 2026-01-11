@@ -686,7 +686,6 @@
                             </div>
                             
                             {paginatedData.map((row, i) => {
-                                const displayRank = (page - 1) * perPage + i + 1;
                                 const isExpanded = expandedRows.has(row.account_index);
                                 const hasTokens = Object.keys(row.tokens).length > 0;
                                 
@@ -696,7 +695,7 @@
                                             className={`table-row ${isExpanded ? 'expanded' : ''}`}
                                             onClick={() => hasTokens && toggleExpand(row.account_index)}
                                         >
-                                            <div className={getRankClass(displayRank)}>{displayRank}</div>
+                                            <div className={getRankClass(row.rank)}>{row.rank}</div>
                                             <div className="address">
                                                 {hasTokens && <span className={`expand-icon ${isExpanded ? 'open' : ''}`}>▶</span>}
                                                 <span onClick={(e) => copyAddress(row.address, e)}>{row.address}</span>
