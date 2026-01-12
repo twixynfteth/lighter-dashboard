@@ -361,15 +361,61 @@
         
         @keyframes spin { to { transform: rotate(360deg); } }
         
+        .mobile-details {
+            display: none;
+        }
+        
         @media (max-width: 768px) {
             .stats { grid-template-columns: repeat(2, 1fr); }
             .tabs { flex-wrap: wrap; }
-            .table-header, .table-row {
-                grid-template-columns: 40px 1fr 100px 80px;
-            }
-            .table-header > div:nth-child(4),
-            .table-row > div:nth-child(4) {
+            .tab { padding: 10px 16px; font-size: 12px; }
+            .table-header {
                 display: none;
+            }
+            .table-row {
+                display: block;
+                padding: 14px 16px;
+                position: relative;
+            }
+            .table-row > .rank {
+                display: inline-block;
+                min-width: 35px;
+                margin-right: 8px;
+            }
+            .table-row > .address {
+                display: inline;
+                font-size: 11px;
+            }
+            .table-row > .balance,
+            .table-row > .change,
+            .table-row > .account-id {
+                display: none;
+            }
+            .mobile-details {
+                display: flex;
+                gap: 12px;
+                margin-top: 8px;
+                padding-left: 43px;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            .mobile-details .balance {
+                color: var(--accent);
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 13px;
+                font-weight: 600;
+            }
+            .mobile-details .change {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 12px;
+            }
+            .mobile-details .account-id {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 11px;
+                color: var(--text-muted);
+            }
+            .expanded-content {
+                padding-left: 16px;
             }
         }
     </style>
@@ -555,7 +601,7 @@
                         <div className="container">
                             <div className="header-content">
                                 <div className="logo">
-                                    lighter_whales<span className="cursor"></span>
+                                    lighter_top_holders<span className="cursor"></span>
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
                                     {litPrice && (
@@ -703,6 +749,11 @@
                                             <div className="balance">{formatBalance(row.balance)}</div>
                                             <div className={getChangeClass(row.change_24h)}>{formatChange(row.change_24h)}</div>
                                             <div className="account-id">#{row.account_index}</div>
+                                            <div className="mobile-details">
+                                                <span className="balance">{formatBalance(row.balance)}</span>
+                                                <span className={getChangeClass(row.change_24h)}>{formatChange(row.change_24h)}</span>
+                                                <span className="account-id">#{row.account_index}</span>
+                                            </div>
                                         </div>
                                         
                                         {isExpanded && (
