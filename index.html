@@ -193,7 +193,7 @@
         
         .table-header {
             display: grid;
-            grid-template-columns: 60px 1fr 150px 120px 80px;
+            grid-template-columns: 60px 1fr 140px 90px 90px 80px;
             padding: 14px 20px;
             background: var(--bg-tertiary);
             border-bottom: 1px solid var(--border);
@@ -206,7 +206,7 @@
         
         .table-row {
             display: grid;
-            grid-template-columns: 60px 1fr 150px 120px 80px;
+            grid-template-columns: 60px 1fr 140px 90px 90px 80px;
             padding: 16px 20px;
             border-bottom: 1px solid var(--border);
             transition: background 0.15s;
@@ -469,7 +469,7 @@
                                     .map((row, index) => {
                                         const tokens = {};
                                         Object.keys(row).forEach(key => {
-                                            if (!['account_index', 'address', 'balance', 'yesterday_balance', 'change_24h', 'total_value_usd'].includes(key)) {
+                                            if (!['account_index', 'address', 'balance', 'yesterday_balance', 'change_24h', 'change_7d', 'total_value_usd'].includes(key)) {
                                                 const val = parseFloat(row[key]);
                                                 if (val > 0) tokens[key] = val;
                                             }
@@ -481,6 +481,7 @@
                                             address: row.address,
                                             balance: parseFloat(row.balance) || 0,
                                             change_24h: parseFloat(row.change_24h) || 0,
+                                            change_7d: parseFloat(row.change_7d) || 0,
                                             tokens: tokens
                                         };
                                     })
@@ -727,13 +728,14 @@
                                 <div>Rank</div>
                                 <div>Address</div>
                                 <div style={{ textAlign: 'right' }}>LIT Balance</div>
-                                <div style={{ textAlign: 'right' }}>24h Change</div>
+                                <div style={{ textAlign: 'right' }}>24h</div>
+                                <div style={{ textAlign: 'right' }}>7d</div>
                                 <div style={{ textAlign: 'right' }}>Account</div>
                             </div>
                             
                             {paginatedData.map((row, i) => {
                                 const isExpanded = expandedRows.has(row.account_index);
-                                const hasTokens = Object.keys(row.tokens).length > 0;
+                                const hasTokens = row.tokens && Object.keys(row.tokens).length > 0;
                                 
                                 return (
                                     <React.Fragment key={row.account_index}>
@@ -748,10 +750,12 @@
                                             </div>
                                             <div className="balance">{formatBalance(row.balance)}</div>
                                             <div className={getChangeClass(row.change_24h)}>{formatChange(row.change_24h)}</div>
+                                            <div className={getChangeClass(row.change_7d)}>{formatChange(row.change_7d)}</div>
                                             <div className="account-id">#{row.account_index}</div>
                                             <div className="mobile-details">
                                                 <span className="balance">{formatBalance(row.balance)}</span>
-                                                <span className={getChangeClass(row.change_24h)}>{formatChange(row.change_24h)}</span>
+                                                <span className={getChangeClass(row.change_24h)}>24h: {formatChange(row.change_24h)}</span>
+                                                <span className={getChangeClass(row.change_7d)}>7d: {formatChange(row.change_7d)}</span>
                                                 <span className="account-id">#{row.account_index}</span>
                                             </div>
                                         </div>
