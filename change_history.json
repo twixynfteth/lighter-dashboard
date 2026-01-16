@@ -1,6 +1,174 @@
 {
   "changes": [
     {
+      "account_index": "365196",
+      "address": "0x50B82f42D51D875b1bfdd946ad27AeE2a6b1AB41",
+      "balance": 834480.41,
+      "change": 165478.68,
+      "timestamp": "2026-01-16T19:09:18.244329"
+    },
+    {
+      "account_index": "702864",
+      "address": "0x9494F3A304194b79c97Bd1D440A33f0693C096D4",
+      "balance": 798000.0,
+      "change": -102088.35,
+      "timestamp": "2026-01-16T19:09:18.244363"
+    },
+    {
+      "account_index": "690490",
+      "address": "0x2884983Dfb5f8D73D210560FcbDbDd219E68D82f",
+      "balance": 793547.62,
+      "change": -22101.41,
+      "timestamp": "2026-01-16T19:09:18.244372"
+    },
+    {
+      "account_index": "2151",
+      "address": "0x004397A3573c77bdF6c422314E88cC0A805a7E71",
+      "balance": 455182.39,
+      "change": -10000.0,
+      "timestamp": "2026-01-16T19:09:18.244401"
+    },
+    {
+      "account_index": "701209",
+      "address": "0x94dac1FacdC4aFd2614C3119447187b4143Bc449",
+      "balance": 236181.79,
+      "change": 26211.65,
+      "timestamp": "2026-01-16T19:09:18.244459"
+    },
+    {
+      "account_index": "248287",
+      "address": "0x61CEeF212fF4a86933C69fb6aca2fe35D8F2A62B",
+      "balance": 203090.7,
+      "change": -46366.58,
+      "timestamp": "2026-01-16T19:09:18.244475"
+    },
+    {
+      "account_index": "346113",
+      "address": "0x42ef1e5D4aB2AE592e2900E0481c894466F55cAC",
+      "balance": 189431.42,
+      "change": -42000.0,
+      "timestamp": "2026-01-16T19:09:18.244487"
+    },
+    {
+      "account_index": "60393",
+      "address": "0xBA474Ab1642101968633525FB117fA12C5BCB4E6",
+      "balance": 153092.31,
+      "change": -50749.2,
+      "timestamp": "2026-01-16T19:09:18.244510"
+    },
+    {
+      "account_index": "455670",
+      "address": "0x6a2b04C75A709F157fac7Bf6DdeCEA6cCD29Cb3B",
+      "balance": 57411.24,
+      "change": -24023.85,
+      "timestamp": "2026-01-16T19:09:18.244618"
+    },
+    {
+      "account_index": "93649",
+      "address": "0xcAe214dcc97572152a667d7C9c06B39D7790EfEa",
+      "balance": 56700.0,
+      "change": 56700.0,
+      "timestamp": "2026-01-16T19:09:18.244629"
+    },
+    {
+      "account_index": "51533",
+      "address": "0x9F86F172f11dD569dEDA287599Fd5Fe340BB2b28",
+      "balance": 48950.21,
+      "change": -10647.77,
+      "timestamp": "2026-01-16T19:09:18.244671"
+    },
+    {
+      "account_index": "24765",
+      "address": "0xFBd359e3EdF32795DCA083157Dc0AE1721473196",
+      "balance": 30000.0,
+      "change": -10000.0,
+      "timestamp": "2026-01-16T19:09:18.244792"
+    },
+    {
+      "account_index": "74324",
+      "address": "0xFb60c3EB1dC6F5a74062382CF52f4dA8EDdADfe6",
+      "balance": 29223.82,
+      "change": -54800.0,
+      "timestamp": "2026-01-16T19:09:18.244804"
+    },
+    {
+      "account_index": "1886",
+      "address": "0x441C4Fe0a65cff33F6F874Cd7C2e1fA3Bc87B689",
+      "balance": 25000.0,
+      "change": -25000.0,
+      "timestamp": "2026-01-16T19:09:18.244855"
+    },
+    {
+      "account_index": "67148",
+      "address": "0xBea57CADabDe39c3EC13a71fD7235F73F2CFdDc9",
+      "balance": 12310.72,
+      "change": -23237.28,
+      "timestamp": "2026-01-16T19:09:18.245187"
+    },
+    {
+      "account_index": "696163",
+      "address": "0x333d0d85Cf0331d292e81f874312c5a5dA930A33",
+      "balance": 10950.67,
+      "change": 10827.67,
+      "timestamp": "2026-01-16T19:09:18.245250"
+    },
+    {
+      "account_index": "698644",
+      "address": "0x8b41013F5f0E23F5444D4A7927DA0e567F50CDD7",
+      "balance": 7041.78,
+      "change": -79657.22,
+      "timestamp": "2026-01-16T19:09:18.245480"
+    },
+    {
+      "account_index": "302",
+      "address": "0xa21b23e5f07E5E28cB42d09502227Eb75b0B64B5",
+      "balance": 2100.0,
+      "change": -24973.71,
+      "timestamp": "2026-01-16T19:09:18.246715"
+    },
+    {
+      "account_index": "615355",
+      "address": "0xcd812016b15e1937e281B7B7b1F1654e54CC0818",
+      "balance": 491.2,
+      "change": -144900.0,
+      "timestamp": "2026-01-16T19:09:18.250166"
+    },
+    {
+      "account_index": "4593",
+      "address": "0x5cC68dCa686990e38659CfdAD720278b674cED5F",
+      "balance": 0.01,
+      "change": -30000.0,
+      "timestamp": "2026-01-16T19:09:18.253695"
+    },
+    {
+      "account_index": "2783",
+      "address": "0xa8185c58002A3d360903962827682355C89f5aD7",
+      "balance": 0.0,
+      "change": -16318.2,
+      "timestamp": "2026-01-16T19:09:18.253718"
+    },
+    {
+      "account_index": "7849",
+      "address": "0xe56cfAD394121C46e908F33533A9C15dE430bB55",
+      "balance": 0.0,
+      "change": -64000.0,
+      "timestamp": "2026-01-16T19:09:18.253732"
+    },
+    {
+      "account_index": "201285",
+      "address": "0x631989B67f70B3278e038a2384a9Ba1ED658dA0c",
+      "balance": 0.0,
+      "change": -11869.08,
+      "timestamp": "2026-01-16T19:09:18.253760"
+    },
+    {
+      "account_index": "705888",
+      "address": "0xB74088A8dBD4d5e615547520F53d6ae2addB1244",
+      "balance": 0.0,
+      "change": -10359.26,
+      "timestamp": "2026-01-16T19:09:18.253772"
+    },
+    {
       "account_index": "690490",
       "address": "0x2884983Dfb5f8D73D210560FcbDbDd219E68D82f",
       "balance": 802874.34,
@@ -141,5 +309,5 @@
       "timestamp": "2026-01-16T18:09:13.835352"
     }
   ],
-  "last_updated": "2026-01-16T18:09:13.835720"
+  "last_updated": "2026-01-16T19:09:18.254111"
 }
